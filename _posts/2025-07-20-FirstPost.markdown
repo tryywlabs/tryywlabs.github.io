@@ -6,10 +6,8 @@ tags: [personal]     # TAG names should always be lowercase
 description: First post of the blog! Exciting.
 comments: false
 ---
-# H1
-First Words
-
-**This Post** has been created to share my projects and study material, which I couldn't all explain in my CVs and interviews.
+## This Blog
+has been created to share my projects and study material, which I couldn't all explain in my CVs and interviews.
 
 I am currently a masters student in **Software Development** at the **University of Glasgow**.
 
