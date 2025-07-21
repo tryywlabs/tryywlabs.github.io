@@ -54,6 +54,7 @@ Navigating to the hidden path: http://10.10.116.74/fuel led me to a **Fuel CMS l
 
 
 I attempted several common default credentials.
+
 |   | **username** | **password** |
 |---|--------------|--------------|
 | 1 | admin        | 1234         |
