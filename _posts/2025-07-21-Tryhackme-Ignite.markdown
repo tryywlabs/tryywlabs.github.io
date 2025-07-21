@@ -189,6 +189,7 @@ The response is parsed and printed, and the loop continues until the user types 
 Executing this script allowed me to perform RCE on the target machine.
 
 ![open reverse shell](assets/img/posts/ctf/ignite/initialrce.png)
+<!--Typo (Initialrce with capital I) fixed-->
 
 
 ### 8. Preparing the Listener
