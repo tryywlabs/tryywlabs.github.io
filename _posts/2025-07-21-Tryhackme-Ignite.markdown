@@ -1,7 +1,7 @@
 ---
 title: Walkthrough - Tryhackme Box (Ignite)
 date: 2025-07-21 15:14:34 +0100
-categories: [Cyber security, CTF Walkthroughs]
+categories: [Cybersecurity, CTF Walkthroughs]
 tags: [ctf]     # TAG names should always be lowercase
 description: Writeup of the tryhackme Ignite box
 comments: false
